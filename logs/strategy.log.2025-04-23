@@ -1,0 +1,30 @@
+2025-04-23 12:03:43,339 - root - INFO - 系统初始化开始...
+2025-04-23 12:03:43,340 - src.modules.risk.monitor - ERROR - 初始化Telegram告警处理器失败: No module named 'utils'
+2025-04-23 12:03:45,464 - src.utils.metrics - INFO - Prometheus指标服务器已启动，端口: 9090
+2025-04-23 12:03:45,464 - root - INFO - 系统初始化完成
+2025-04-23 12:03:45,464 - root - INFO - 系统启动中...
+2025-04-23 12:03:45,464 - src.modules.state.manager - INFO - 初始化状态管理器
+2025-04-23 12:03:45,464 - src.modules.state.manager - ERROR - 初始化状态管理器失败: 环境变量 DB_PASSWORD 未设置
+2025-04-23 12:03:45,464 - src.modules.state.manager - WARNING - 将使用文件系统作为备用状态存储
+2025-04-23 12:03:45,464 - src.modules.market_data.service - INFO - 初始化市场数据服务
+2025-04-23 12:03:45,464 - src.modules.market_data.service - ERROR - 连接交易所 binance 失败: 环境变量 BINANCE_API_KEY 未设置
+2025-04-23 12:04:25,315 - root - INFO - 系统初始化开始...
+2025-04-23 12:04:25,316 - src.modules.risk.monitor - ERROR - 初始化Telegram告警处理器失败: No module named 'utils'
+2025-04-23 12:04:25,320 - src.utils.metrics - INFO - Prometheus指标服务器已启动，端口: 9090
+2025-04-23 12:04:25,320 - root - INFO - 系统初始化完成
+2025-04-23 12:04:25,320 - root - INFO - 系统启动中...
+2025-04-23 12:04:25,320 - src.modules.state.manager - INFO - 初始化状态管理器
+2025-04-23 12:04:25,320 - src.modules.state.manager - ERROR - 初始化状态管理器失败: 环境变量 DB_PASSWORD 未设置
+2025-04-23 12:04:25,320 - src.modules.state.manager - WARNING - 将使用文件系统作为备用状态存储
+2025-04-23 12:04:25,320 - src.modules.market_data.service - INFO - 初始化市场数据服务
+2025-04-23 12:04:25,320 - src.modules.market_data.service - ERROR - 连接交易所 binance 失败: 环境变量 BINANCE_API_KEY 未设置
+2025-04-23 12:04:33,548 - root - INFO - 系统初始化开始...
+2025-04-23 12:04:33,548 - src.modules.risk.monitor - ERROR - 初始化Telegram告警处理器失败: No module named 'utils'
+2025-04-23 12:04:33,551 - src.utils.metrics - INFO - Prometheus指标服务器已启动，端口: 9090
+2025-04-23 12:04:33,552 - root - INFO - 系统初始化完成
+2025-04-23 12:04:33,552 - root - INFO - 系统启动中...
+2025-04-23 12:04:33,552 - src.modules.state.manager - INFO - 初始化状态管理器
+2025-04-23 12:04:33,552 - src.modules.state.manager - ERROR - 初始化状态管理器失败: 环境变量 DB_PASSWORD 未设置
+2025-04-23 12:04:33,552 - src.modules.state.manager - WARNING - 将使用文件系统作为备用状态存储
+2025-04-23 12:04:33,552 - src.modules.market_data.service - INFO - 初始化市场数据服务
+2025-04-23 12:04:33,552 - src.modules.market_data.service - ERROR - 连接交易所 binance 失败: 环境变量 BINANCE_API_KEY 未设置

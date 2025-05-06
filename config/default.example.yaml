@@ -1,0 +1,67 @@
+exchanges:
+  binance:
+    api_key_env: BINANCE_API_KEY
+    api_secret_env: BINANCE_API_SECRET
+    testnet: false
+    
+  bybit:
+    api_key_env: BYBIT_API_KEY
+    api_secret_env: BYBIT_API_SECRET
+    testnet: false
+
+strategy:
+  initial_capital: 200000
+  accounts_count: 20
+  account_capital: 10000
+  leverage_ratio: 4
+  target_loss: 10000
+  funding_allocation: 0.15
+  
+risk:
+  max_leverage_ratio: 10
+  max_account_loss: 15000
+  min_funding_rate: -0.01
+  emergency_exit_threshold: -0.02
+  
+database:
+  timescale:
+    host: localhost
+    port: 5432
+    user: postgres
+    password_env: DB_PASSWORD
+    database: funding_strategy
+  
+  redis:
+    host: localhost
+    port: 6379
+    db: 0
+
+logging:
+  level: INFO
+  file: logs/strategy.log
+  rotation: 1d
+  retention: 30d
+  
+monitoring:
+  prometheus:
+    enabled: true
+    port: 9090
+  
+  grafana:
+    enabled: true
+    port: 3000
+    
+alerts:
+  telegram:
+    enabled: true
+    token_env: TELEGRAM_BOT_TOKEN
+    chat_id_env: TELEGRAM_CHAT_ID
+  
+  email:
+    enabled: false
+    smtp_server: smtp.example.com
+    port: 587
+    sender_env: EMAIL_SENDER
+    password_env: EMAIL_PASSWORD
+    recipients:
+      - alerts@example.com

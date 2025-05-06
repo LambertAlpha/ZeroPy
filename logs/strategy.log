@@ -1,0 +1,79 @@
+2025-05-06 20:02:36,398 - root - INFO - 系统初始化开始...
+2025-05-06 20:02:36,399 - src.modules.risk.monitor - ERROR - 初始化Telegram告警处理器失败: No module named 'utils'
+2025-05-06 20:02:36,412 - src.utils.metrics - INFO - Prometheus指标服务器已启动，端口: 9090
+2025-05-06 20:02:36,412 - root - INFO - 系统初始化完成
+2025-05-06 20:02:36,412 - root - INFO - 系统启动中...
+2025-05-06 20:02:36,412 - src.modules.state.manager - INFO - 初始化状态管理器
+2025-05-06 20:02:36,412 - src.modules.state.manager - ERROR - 初始化状态管理器失败: 环境变量 DB_PASSWORD 未设置
+2025-05-06 20:02:36,412 - src.modules.state.manager - WARNING - 将使用文件系统作为备用状态存储
+2025-05-06 20:02:36,412 - src.modules.market_data.service - INFO - 初始化市场数据服务
+2025-05-06 20:02:36,412 - src.modules.market_data.service - ERROR - 连接交易所 binance 失败: 环境变量 BINANCE_API_KEY 未设置
+2025-05-06 21:19:56,322 - root - INFO - 系统初始化开始...
+2025-05-06 21:19:56,322 - src.modules.risk.monitor - ERROR - 初始化Telegram告警处理器失败: No module named 'utils'
+2025-05-06 21:19:56,326 - src.utils.metrics - INFO - Prometheus指标服务器已启动，端口: 9090
+2025-05-06 21:19:56,326 - root - INFO - 系统初始化完成
+2025-05-06 21:19:56,326 - root - INFO - 系统启动中...
+2025-05-06 21:19:56,326 - src.modules.state.manager - INFO - 初始化状态管理器
+2025-05-06 21:19:56,326 - src.modules.state.manager - ERROR - 初始化状态管理器失败: 环境变量 DB_PASSWORD 未设置
+2025-05-06 21:19:56,326 - src.modules.state.manager - WARNING - 将使用文件系统作为备用状态存储
+2025-05-06 21:19:56,326 - src.modules.market_data.service - INFO - 初始化市场数据服务
+2025-05-06 21:19:56,326 - src.modules.market_data.service - ERROR - 连接交易所 binance 失败: 环境变量 BINANCE_API_KEY 未设置
+2025-05-06 21:20:47,455 - root - INFO - 系统初始化开始...
+2025-05-06 21:20:47,455 - src.modules.risk.monitor - ERROR - 初始化Telegram告警处理器失败: No module named 'utils'
+2025-05-06 21:20:47,459 - src.utils.metrics - INFO - Prometheus指标服务器已启动，端口: 9090
+2025-05-06 21:20:47,459 - root - INFO - 系统初始化完成
+2025-05-06 21:20:47,459 - root - INFO - 系统启动中...
+2025-05-06 21:20:47,459 - src.modules.state.manager - INFO - 初始化状态管理器
+2025-05-06 21:20:47,459 - src.modules.state.manager - ERROR - 初始化状态管理器失败: 环境变量 DB_PASSWORD 未设置
+2025-05-06 21:20:47,459 - src.modules.state.manager - WARNING - 将使用文件系统作为备用状态存储
+2025-05-06 21:20:47,459 - src.modules.market_data.service - INFO - 初始化市场数据服务
+2025-05-06 21:20:47,459 - src.modules.market_data.service - ERROR - 连接交易所 binance 失败: 环境变量 BINANCE_API_KEY 未设置
+2025-05-06 21:23:58,003 - root - INFO - 系统初始化开始...
+2025-05-06 21:23:58,065 - src.modules.risk.monitor - ERROR - 初始化Telegram告警处理器失败: 环境变量 TELEGRAM_BOT_TOKEN 未设置
+2025-05-06 21:23:58,069 - src.utils.metrics - INFO - Prometheus指标服务器已启动，端口: 9090
+2025-05-06 21:23:58,069 - root - INFO - 系统初始化完成
+2025-05-06 21:23:58,069 - root - INFO - 系统启动中...
+2025-05-06 21:23:58,069 - src.modules.state.manager - INFO - 初始化状态管理器
+2025-05-06 21:23:58,084 - src.modules.state.manager - ERROR - 初始化状态管理器失败: No module named 'asyncpg'
+2025-05-06 21:23:58,084 - src.modules.state.manager - WARNING - 将使用文件系统作为备用状态存储
+2025-05-06 21:23:58,084 - src.modules.market_data.service - INFO - 初始化市场数据服务
+2025-05-06 21:23:58,088 - src.modules.market_data.service - INFO - 成功连接交易所: binance
+2025-05-06 21:23:58,088 - src.modules.market_data.service - ERROR - 连接交易所 bybit 失败: 环境变量 BYBIT_API_KEY 未设置
+2025-05-06 21:42:26,529 - root - INFO - 系统初始化开始...
+2025-05-06 21:42:26,640 - src.modules.risk.monitor - INFO - 已初始化Telegram告警处理器
+2025-05-06 21:42:26,644 - src.utils.metrics - INFO - Prometheus指标服务器已启动，端口: 9090
+2025-05-06 21:42:26,644 - root - INFO - 系统初始化完成
+2025-05-06 21:42:26,644 - root - INFO - 系统启动中...
+2025-05-06 21:42:26,644 - src.modules.state.manager - INFO - 初始化状态管理器
+2025-05-06 21:42:27,341 - src.modules.state.manager - ERROR - 初始化状态管理器失败: the greenlet library is required to use this function. No module named 'greenlet'
+2025-05-06 21:42:27,341 - src.modules.state.manager - WARNING - 将使用文件系统作为备用状态存储
+2025-05-06 21:42:27,341 - src.modules.market_data.service - INFO - 初始化市场数据服务
+2025-05-06 21:42:27,353 - src.modules.market_data.service - INFO - 成功连接交易所: binance
+2025-05-06 21:42:27,358 - src.modules.market_data.service - INFO - 成功连接交易所: bybit
+2025-05-06 21:42:27,358 - src.modules.account.manager - INFO - 初始化账户管理器
+2025-05-06 21:42:27,367 - src.modules.account.manager - INFO - 账户管理器成功连接交易所: binance
+2025-05-06 21:42:28,201 - src.modules.account.manager - ERROR - 初始化交易所 binance 的账户信息失败: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-05-06 21:42:28,202 - src.modules.account.manager - ERROR - 账户管理器连接交易所 binance 失败: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-05-06 21:42:28,272 - ccxt.base.exchange - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-05-06 21:42:28,272 - asyncio - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x10805f940>, 655206.114676625)]']
+connector: <aiohttp.connector.TCPConnector object at 0x10806d990>
+2025-05-06 21:43:10,822 - root - INFO - 系统初始化开始...
+2025-05-06 21:43:10,933 - src.modules.risk.monitor - INFO - 已初始化Telegram告警处理器
+2025-05-06 21:43:10,938 - src.utils.metrics - INFO - Prometheus指标服务器已启动，端口: 9090
+2025-05-06 21:43:10,938 - root - INFO - 系统初始化完成
+2025-05-06 21:43:10,938 - root - INFO - 系统启动中...
+2025-05-06 21:43:10,938 - src.modules.state.manager - INFO - 初始化状态管理器
+2025-05-06 21:43:10,995 - src.modules.state.manager - ERROR - 初始化状态管理器失败: role "postgres" does not exist
+2025-05-06 21:43:10,996 - src.modules.state.manager - WARNING - 将使用文件系统作为备用状态存储
+2025-05-06 21:43:10,996 - src.modules.market_data.service - INFO - 初始化市场数据服务
+2025-05-06 21:43:11,000 - src.modules.market_data.service - INFO - 成功连接交易所: binance
+2025-05-06 21:43:11,003 - src.modules.market_data.service - INFO - 成功连接交易所: bybit
+2025-05-06 21:43:11,003 - src.modules.account.manager - INFO - 初始化账户管理器
+2025-05-06 21:43:11,008 - src.modules.account.manager - INFO - 账户管理器成功连接交易所: binance
+2025-05-06 21:43:12,278 - src.modules.account.manager - ERROR - 初始化交易所 binance 的账户信息失败: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-05-06 21:43:12,278 - src.modules.account.manager - ERROR - 账户管理器连接交易所 binance 失败: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-05-06 21:43:12,362 - ccxt.base.exchange - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2025-05-06 21:43:12,362 - asyncio - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x107dc4460>, 655250.191452208)]']
+connector: <aiohttp.connector.TCPConnector object at 0x107d3fca0>

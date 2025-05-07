@@ -82,13 +82,18 @@ class TelegramAlertHandler(AlertHandler):
             return False
         
         try:
-            # 使用异步执行发送
-            loop = asyncio.get_event_loop()
-            await loop.run_in_executor(
-                None,
-                lambda: self.bot.send_message(chat_id=self.chat_id, text=message)
-            )
-            return True
+            # 在开发模式下使用同步方式避免异步问题
+            import os
+            dev_mode = os.environ.get("DEV_MODE", "false").lower() == "true"
+            
+            if dev_mode:
+                # 开发模式下只记录日志，不实际发送
+                self.logger.info(f"开发模式: 模拟发送Telegram告警: {message}")
+                return True
+            else:
+                # 正确处理异步调用
+                await self.bot.send_message(chat_id=self.chat_id, text=message)
+                return True
         except Exception as e:
             self.logger.error(f"发送Telegram告警失败: {e}")
             return False

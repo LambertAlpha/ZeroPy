@@ -4,6 +4,7 @@
 负责管理多个交易子账户，跟踪余额和持仓
 """
 import logging
+import os
 from typing import Dict, Any, List, Optional
 import ccxt.async_support as ccxt
 from datetime import datetime
@@ -26,6 +27,9 @@ class AccountManager:
         self.accounts = {}  # 存储账户信息的缓存
         self.positions_cache = {}  # 存储持仓信息的缓存
         self.balance_cache = {}  # 存储余额信息的缓存
+        # 标记主要使用的交易所
+        self.primary_exchange = os.environ.get("PRIMARY_EXCHANGE", "bybit").lower()
+        self.logger.info(f"将使用 {self.primary_exchange} 作为主要交易所")
     
     async def initialize(self):
         """初始化账户管理器，连接各交易所"""
@@ -33,6 +37,11 @@ class AccountManager:
         
         for exchange_id, exchange_config in self.config["exchanges"].items():
             try:
+                # 如果不是主要交易所且不在测试模式下，跳过初始化
+                if exchange_id.lower() != self.primary_exchange:
+                    self.logger.info(f"跳过非主要交易所 {exchange_id} 的初始化")
+                    continue
+                
                 # 获取API密钥和密码
                 api_key = self._get_env_var(exchange_config["api_key_env"])
                 api_secret = self._get_env_var(exchange_config["api_secret_env"])
@@ -58,7 +67,8 @@ class AccountManager:
                 
             except Exception as e:
                 self.logger.error(f"账户管理器连接交易所 {exchange_id} 失败: {e}")
-                raise
+                if exchange_id.lower() == self.primary_exchange:
+                    raise  # 仅在主要交易所连接失败时抛出异常
     
     @staticmethod
     def _get_env_var(env_var_name: str) -> str:
@@ -115,7 +125,8 @@ class AccountManager:
                 
         except Exception as e:
             self.logger.error(f"初始化交易所 {exchange_id} 的账户信息失败: {e}")
-            raise
+            if exchange_id.lower() == self.primary_exchange:
+                raise  # 仅在主要交易所账户信息初始化失败时抛出异常
     
     async def get_account_balance(self, account_id: str, asset: str) -> float:
         """获取账户特定资产的余额

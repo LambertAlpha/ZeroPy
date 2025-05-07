@@ -5,6 +5,7 @@
 """
 import logging
 import asyncio
+import os
 from typing import Dict, Any, List, Optional, Literal
 import time
 from datetime import datetime
@@ -37,6 +38,11 @@ class RiskMonitor:
         
         # 初始化告警处理器
         self._init_alert_handlers()
+        
+        # 检查是否在开发模式
+        self.dev_mode = os.environ.get("DEV_MODE", "false").lower() == "true"
+        if self.dev_mode:
+            self.logger.warning("风险监控运行在开发模式下，部分功能可能被禁用")
     
     def _init_alert_handlers(self):
         """初始化告警处理器"""
@@ -110,7 +116,17 @@ class RiskMonitor:
         
         # 确保必要的服务可用
         if not self.market_data or not self.account_manager:
-            raise ValueError("风险监控需要市场数据服务和账户管理器")
+            if self.dev_mode:
+                self.logger.warning("开发模式: 市场数据服务或账户管理器不可用，将使用模拟服务")
+                # 在开发模式下，如果缺少服务，创建模拟服务
+                if not self.market_data:
+                    self.logger.warning("开发模式: 使用模拟市场数据服务")
+                    self.market_data = self._create_mock_market_data()
+                if not self.account_manager:
+                    self.logger.warning("开发模式: 使用模拟账户管理器")
+                    self.account_manager = self._create_mock_account_manager()
+            else:
+                raise ValueError("风险监控需要市场数据服务和账户管理器")
         
         # 标记为正在监控
         self.is_monitoring = True
@@ -119,6 +135,77 @@ class RiskMonitor:
         self.monitoring_task = asyncio.create_task(self._monitoring_loop())
         
         self.logger.info("风险监控已启动")
+    
+    def _create_mock_market_data(self):
+        """创建模拟市场数据服务
+        
+        Returns:
+            模拟市场数据服务
+        """
+        from unittest.mock import MagicMock
+        mock_market_data = MagicMock()
+        
+        # 模拟get_price方法
+        async def mock_get_price(symbol, exchange_id=None):
+            self.logger.info(f"（模拟）获取价格: {symbol}")
+            # 返回模拟价格
+            if "BTC" in symbol:
+                return 40000.0
+            elif "ETH" in symbol:
+                return 2000.0
+            else:
+                return 100.0
+            
+        # 模拟get_funding_rate方法
+        async def mock_get_funding_rate(symbol, exchange_id=None):
+            self.logger.info(f"（模拟）获取资金费率: {symbol}")
+            # 返回模拟资金费率
+            return 0.0001
+        
+        # 设置模拟方法
+        mock_market_data.get_price = mock_get_price
+        mock_market_data.get_funding_rate = mock_get_funding_rate
+        
+        return mock_market_data
+    
+    def _create_mock_account_manager(self):
+        """创建模拟账户管理器
+        
+        Returns:
+            模拟账户管理器
+        """
+        from unittest.mock import MagicMock
+        mock_account_manager = MagicMock()
+        
+        # 模拟get_positions方法
+        async def mock_get_positions(account_id):
+            self.logger.info(f"（模拟）获取账户持仓: {account_id}")
+            # 返回空列表表示没有持仓
+            return []
+        
+        # 模拟get_account_balance方法
+        async def mock_get_account_balance(account_id, asset):
+            self.logger.info(f"（模拟）获取账户余额: {account_id} {asset}")
+            # 返回模拟余额
+            if asset == "BTC":
+                return 1.0
+            elif asset == "ETH":
+                return 10.0
+            else:
+                return 10000.0
+        
+        # 模拟get_leverage_loan_info方法
+        async def mock_get_leverage_loan_info(account_id):
+            self.logger.info(f"（模拟）获取杠杆借贷信息: {account_id}")
+            # 返回空字典表示没有杠杆借贷
+            return {"margin_positions": []}
+        
+        # 设置模拟方法
+        mock_account_manager.get_positions = mock_get_positions
+        mock_account_manager.get_account_balance = mock_get_account_balance
+        mock_account_manager.get_leverage_loan_info = mock_get_leverage_loan_info
+        
+        return mock_account_manager
     
     async def stop_monitoring(self):
         """停止风险监控"""

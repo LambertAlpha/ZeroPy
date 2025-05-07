@@ -44,8 +44,9 @@ class StateManager:
         try:
             # 连接TimescaleDB
             if self.db_config:
+                self.logger.info("开始连接数据库...")
                 db_url = self._get_db_url()
-                self.engine = create_async_engine(db_url, echo=False)
+                self.engine = create_async_engine(db_url, echo=True)  # 设置为True查看详细日志
                 self.async_session = sessionmaker(
                     self.engine, class_=AsyncSession, expire_on_commit=False
                 )
@@ -84,13 +85,17 @@ class StateManager:
         Returns:
             数据库连接URL
         """
-        password = self._get_env_var(self.db_config.get("password_env", "DB_PASSWORD"))
-        host = self.db_config.get("host", "localhost")
-        port = self.db_config.get("port", 5432)
-        user = self.db_config.get("user", "postgres")
-        database = self.db_config.get("database", "funding_strategy")
+        import os
+        # 使用环境变量中的值，或者使用新的默认值
+        password = os.environ.get("DB_PASSWORD", "") or ""
+        host = os.environ.get("DB_HOST", self.db_config.get("host", "localhost"))
+        port = int(os.environ.get("DB_PORT", self.db_config.get("port", 5432)))
+        user = "lambertlin"  # 确保使用lambertlin用户
+        database = "zeropy_funding"  # 确保使用zeropy_funding数据库
         
-        return f"postgresql+asyncpg://{user}:{password}@{host}:{port}/{database}"
+        url = f"postgresql+asyncpg://{user}:{password}@{host}:{port}/{database}"
+        self.logger.info(f"数据库连接URL: {url.replace(password, '******') if password else url}")
+        return url
     
     @staticmethod
     def _get_env_var(env_var_name: str) -> str:
@@ -193,10 +198,14 @@ class StateManager:
                 # 使用数据库保存
                 async with self.async_session() as session:
                     # 转换为数据库模型
+                    # 将账户状态字典转换为JSON字符串
+                    import json
+                    serialized_accounts_status = json.dumps(state.accounts_status)
+                    
                     state_dict = {
                         "strategy_id": "funding_strategy",  # 固定ID，可以改为动态的
                         "is_active": state.is_active,
-                        "accounts_status": state.accounts_status,
+                        "accounts_status": serialized_accounts_status,  # JSON字符串
                         "started_at": state.started_at,
                         "last_updated": datetime.now()
                     }
@@ -257,10 +266,19 @@ class StateManager:
                     row = result.fetchone()
                     
                     if row:
+                        # 如果账户状态是JSON字符串，需要反序列化
+                        import json
+                        accounts_status = row.accounts_status
+                        if isinstance(accounts_status, str):
+                            try:
+                                accounts_status = json.loads(accounts_status)
+                            except Exception as e:
+                                self.logger.warning(f"解析账户状态JSON时出错: {e}")
+                        
                         # 转换为StrategyState对象
                         return StrategyState(
                             is_active=row.is_active,
-                            accounts_status=row.accounts_status,
+                            accounts_status=accounts_status,
                             started_at=row.started_at,
                             last_updated=row.last_updated
                         )

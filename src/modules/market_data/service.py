@@ -5,6 +5,7 @@
 """
 import asyncio
 import logging
+import os
 from typing import Dict, Any, Callable, List, Optional
 import ccxt.async_support as ccxt
 from datetime import datetime

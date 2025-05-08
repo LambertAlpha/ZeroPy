@@ -87,7 +87,7 @@ class StrategyEngine:
         accounts_count = self.strategy_config.get("accounts_count", 20)
         account_capital = self.strategy_config.get("account_capital", 10000)
         
-        # 获取主账户ID (简化处理，假设第一个是主账户)
+        # 获取主账户ID (假设第一个是主账户)
         exchange_id = next(iter(self.config["exchanges"].keys()))
         master_account_id = f"{exchange_id}_main"
         
@@ -141,9 +141,7 @@ class StrategyEngine:
             # 2. 借入杠杆资金
             leverage_ratio = self.strategy_config.get("leverage_ratio", 4)
             leverage_amount = initial_capital * leverage_ratio
-            
-            # 简化处理，直接使用杠杆购买
-            
+
             # 3. 获取BTC价格
             btc_price = await self.market_data.get_price("BTC/USDT")
             
@@ -151,7 +149,7 @@ class StrategyEngine:
             total_usdt = initial_capital + leverage_amount
             btc_amount = total_usdt / btc_price
             
-            # 5. 杠杆购买BTC
+            # 5. 5倍杠杆购买BTC
             spot_order = await self.execution_service.spot_leverage_buy(
                 account_id=account_id,
                 symbol="BTC/USDT",
@@ -162,6 +160,7 @@ class StrategyEngine:
             # 6. 开设U本位空头
             half_position_btc = btc_amount / 2
             
+            #btc/usdtu本位做空BTC/USDT50w
             futures_order1 = await self.execution_service.futures_short(
                 account_id=account_id,
                 symbol="BTC/USDT",
@@ -169,7 +168,7 @@ class StrategyEngine:
                 is_coin_margined=False
             )
             
-            # 使用另一个U本位合约对冲
+            # 使用另一个U本位合约 btc/usdc本位做空btc/usdc50w
             futures_symbol2 = "BTC/USDC" if "BTC/USDC" in self.market_data.ticker_cache else "BTC/USDT"
             futures_order2 = await self.execution_service.futures_short(
                 account_id=account_id,
